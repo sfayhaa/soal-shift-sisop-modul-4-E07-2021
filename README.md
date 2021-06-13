@@ -20,7 +20,7 @@ d) Setiap pembuatan direktori ter-encode (mkdir atau rename) akan tercatat ke se
 e) Metode encode pada suatu direktori juga berlaku terhadap direktori yang ada di dalamnya.(rekursif)
 
 ### penjelasan
-### output
+
 ### kendala
 
 
@@ -40,7 +40,7 @@ e) Metode encode pada suatu direktori juga berlaku terhadap direktori yang ada d
 ### 2e
 **Soal** : Pada metode enkripsi ini, file-file pada direktori asli akan menjadi terpecah menjadi file-file kecil sebesar 1024 bytes, sementara jika diakses melalui filesystem rancangan Sin dan Sei akan menjadi normal.
 
-### output
+
 ### kendala yang dialami
 
 ## no3
@@ -48,46 +48,49 @@ e) Metode encode pada suatu direktori juga berlaku terhadap direktori yang ada d
 ## no4
 ### 4a
 **soal** : Log system yang akan terbentuk bernama “SinSeiFS.log” pada direktori home pengguna (/home/[user]/SinSeiFS.log). Log system ini akan menyimpan daftar perintah system call yang telah dijalankan pada filesystem.
+Karena Sin dan Sei suka kerapian maka log yang dibuat akan dibagi menjadi dua level, yaitu INFO dan WARNING.
 
-### 4b
-**soal** : Karena Sin dan Sei suka kerapian maka log yang dibuat akan dibagi menjadi dua level, yaitu INFO dan WARNING.
-
-format INFO dan WARNING dimana Membuat format info dan warning fungsi `makeLog`
+berikut adalah format INFO dan WARNING yang dimana Membuat format info dan warning fungsi `makeLog`
 ```
+...
 }else if(strcmp(sys_call,"RMDIR")==0 || strcmp(sys_call,"UNLINK")==0){
-        fprintf(LOGFILE4, "WARNING::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
+        fprintf(LOGFILE4, "WARNING::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, 
+        timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
     }else{
-        fprintf(LOGFILE4, "INFO::%d%02d%02d-%02d:%02d:%02d:%s::/%s::%s\n",timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
+        fprintf(LOGFILE4, "INFO::%d%02d%02d-%02d:%02d:%02d:%s::/%s::%s\n",timeinfo->tm_mday, 
+        timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
     }
+...
 ```
 
 fungsi makeLog yang dibuat bersamaan dengan log nomor 1. sehingga percabangannya lebih banyak dan lebih spesifik. format sudah sesuai dengan permintaan soal dimana timestamp harus mengoutputkan 2 digit pada bagian tanggal dan waktunya. kemudian diikuti jenis sys_call dan detail perubahannya.
-
-### 4c
-**soal** : Untuk log level WARNING, digunakan untuk mencatat syscall rmdir dan unlink.
-
-WARNING dioutputkan saat system_call adalah RMDIR dan UNLINK 
+sedangkan untuk log level WARNING, digunakan untuk mencatat syscall rmdir dan unlink.WARNING dioutputkan saat system_call adalah RMDIR dan UNLINK 
 ```
+...
 else if(strcmp(sys_call,"RMDIR")==0 || strcmp(sys_call,"UNLINK")==0){
-        fprintf(LOGFILE4, "WARNING::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
+        fprintf(LOGFILE4, "WARNING::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, 
+        timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
     }
+...
 ```
-
-### 4d
-**soal** : Sisanya, akan dicatat pada level INFO.
 
 INFO dioutputkan saat system_call selain RMDIR dan UNLINK dimana WARNING hanya dioutputkan selain ketika UNLINK atau RMDIR pada source code dibawah diambil sebagai contoh MKDIR dan RENAME.
 ```
+...
   if(strcmp(sys_call,"RENAME")==0){
-        fprintf(LOGFILE4, "INFO::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
+        fprintf(LOGFILE4, "INFO::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, 
+        timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
         fprintf(LOGFILE1, "%s : %s -> %s\n", sys_call, data.path1, data.path2);	
     }else if(strcmp(sys_call,"MKDIR")==0 ){
     	fprintf(LOGFILE1, "%s : %s\n", sys_call, data.path1);
-        fprintf(LOGFILE4, "INFO::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
+        fprintf(LOGFILE4, "INFO::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, 
+        timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
     }
+...
 ```
 
-### 4e
-**soal** : format baris pada log.
+Adapun berikut adalah format baris pada log.
 
-Level : Level logging, dd : 2 digit tanggal, mm : 2 digit bulan, yyyy : 4 digit tahun, HH : 2 digit jam (format 24 Jam),MM : 2 digit menit, SS : 2 digit detik, CMD : System Call yang terpanggil, DESC : informasi dan parameter tambahan. Seperti yang dapat dilihat pada gambar :
+CMD : System Call yang terpanggil, DESC : informasi dan parameter tambahan, Level : Level logging, dd : tanggal, mm : bulan, yyyy : tahun, HH : jam (format 24 Jam), MM : menit,  dan SS : detik.
+
+## output
