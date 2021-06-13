@@ -46,7 +46,6 @@ e) Metode encode pada suatu direktori juga berlaku terhadap direktori yang ada d
 ## no3
 
 ## no4
-### 4a
 **soal** : Log system yang akan terbentuk bernama “SinSeiFS.log” pada direktori home pengguna (/home/[user]/SinSeiFS.log). Log system ini akan menyimpan daftar perintah system call yang telah dijalankan pada filesystem.
 Karena Sin dan Sei suka kerapian maka log yang dibuat akan dibagi menjadi dua level, yaitu INFO dan WARNING.
 
