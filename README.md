@@ -62,7 +62,7 @@ berikut adalah format INFO dan WARNING yang dimana Membuat format info dan warni
 ```
 
 kemudian terdapat fungsi makeLog yang dibuat secara bersamaan dengan log nomor 1. Sehingga percabangannya lebih banyak juga spesifik, adapun format sudah sesuai dengan permintaan soal yang diminta dengan timestamp harus mengoutputkan 2 digit pada bagian tanggal pun waktunya setelah itu juga diikuti jenis sys_call dan detail perubahannya.
-adapun untuk bagian unlink.WARNING dioutputkan saat system_call adalah RMDIR dan UNLINK  sedangkan log level WARNING, bertujuan untuk mencatat syscall rmdir-nya.
+adapun untuk bagian unlink.WARNING dioutputkan saat system_call adalah RMDIR dan UNLINK  sedangkan log level WARNING, bertujuan untuk mencatat syscall rmdir-nya. Adapun berikut adalah format baris pada log. CMD : System Call yang terpanggil, DESC : informasi dan parameter tambahan, Level : Level logging, dd : tanggal, mm : bulan, yyyy : tahun, HH : jam (format 24 Jam), MM : menit,  dan SS : detik.
 ```
 ...
 else if(strcmp(sys_call,"RMDIR")==0 || strcmp(sys_call,"UNLINK")==0){
@@ -72,8 +72,6 @@ else if(strcmp(sys_call,"RMDIR")==0 || strcmp(sys_call,"UNLINK")==0){
 ...
 ```
 
-Adapun berikut adalah format baris pada log.
 
-CMD : System Call yang terpanggil, DESC : informasi dan parameter tambahan, Level : Level logging, dd : tanggal, mm : bulan, yyyy : tahun, HH : jam (format 24 Jam), MM : menit,  dan SS : detik.
 
 ## output
