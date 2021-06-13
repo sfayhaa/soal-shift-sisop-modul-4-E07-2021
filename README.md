@@ -92,7 +92,7 @@ Apabila benar terdapat directory `AtoZ_folder` maka menggunakan strtok_r untuk m
             }
 ```
 Untuk folder, kita bisa langsung melakukan encode nama folder tersebut. Foldername juga perlu di strcat dengan path sebelumnya.
-### kendala
+#
 
 
 ## no2
@@ -112,7 +112,7 @@ Untuk folder, kita bisa langsung melakukan encode nama folder tersebut. Folderna
 **Soal** : Pada metode enkripsi ini, file-file pada direktori asli akan menjadi terpecah menjadi file-file kecil sebesar 1024 bytes, sementara jika diakses melalui filesystem rancangan Sin dan Sei akan menjadi normal.
 
 
-### kendala yang dialami
+
 
 ## no3
 
@@ -163,4 +163,4 @@ Adapun berikut adalah format baris pada log.
 
 CMD : System Call yang terpanggil, DESC : informasi dan parameter tambahan, Level : Level logging, dd : tanggal, mm : bulan, yyyy : tahun, HH : jam (format 24 Jam), MM : menit,  dan SS : detik.
 
-## output
+## Kendala yang dialami (1,2,3)
