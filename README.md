@@ -47,8 +47,7 @@ e) Metode encode pada suatu direktori juga berlaku terhadap direktori yang ada d
 
 ## no4
 **soal** : Log system yang akan terbentuk bernama “SinSeiFS.log” pada direktori home pengguna (/home/[user]/SinSeiFS.log). Log system ini akan menyimpan daftar perintah system call yang telah dijalankan pada filesystem.
-Karena Sin dan Sei suka kerapian maka log yang dibuat akan dibagi menjadi dua level, yaitu INFO dan WARNING.
-
+berdasarkan soal dikarena Sin dan Sei suka kerapian maka log yang dibuat akan dibagi menjadi dua level, yaitu INFO dan WARNING.
 berikut adalah format INFO dan WARNING yang dimana Membuat format info dan warning fungsi `makeLog`
 ```
 ...
@@ -62,27 +61,12 @@ berikut adalah format INFO dan WARNING yang dimana Membuat format info dan warni
 ...
 ```
 
-fungsi makeLog yang dibuat bersamaan dengan log nomor 1. sehingga percabangannya lebih banyak dan lebih spesifik. format sudah sesuai dengan permintaan soal dimana timestamp harus mengoutputkan 2 digit pada bagian tanggal dan waktunya. kemudian diikuti jenis sys_call dan detail perubahannya.
-sedangkan untuk log level WARNING, digunakan untuk mencatat syscall rmdir dan unlink.WARNING dioutputkan saat system_call adalah RMDIR dan UNLINK 
+kemudian terdapat fungsi makeLog yang dibuat secara bersamaan dengan log nomor 1. Sehingga percabangannya lebih banyak juga spesifik, adapun format sudah sesuai dengan permintaan soal yang diminta dengan timestamp harus mengoutputkan 2 digit pada bagian tanggal pun waktunya setelah itu juga diikuti jenis sys_call dan detail perubahannya.
+adapun untuk bagian unlink.WARNING dioutputkan saat system_call adalah RMDIR dan UNLINK  sedangkan log level WARNING, bertujuan untuk mencatat syscall rmdir-nya.
 ```
 ...
 else if(strcmp(sys_call,"RMDIR")==0 || strcmp(sys_call,"UNLINK")==0){
         fprintf(LOGFILE4, "WARNING::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, 
-        timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
-    }
-...
-```
-
-INFO dioutputkan saat system_call selain RMDIR dan UNLINK dimana WARNING hanya dioutputkan selain ketika UNLINK atau RMDIR pada source code dibawah diambil sebagai contoh MKDIR dan RENAME.
-```
-...
-  if(strcmp(sys_call,"RENAME")==0){
-        fprintf(LOGFILE4, "INFO::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, 
-        timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
-        fprintf(LOGFILE1, "%s : %s -> %s\n", sys_call, data.path1, data.path2);	
-    }else if(strcmp(sys_call,"MKDIR")==0 ){
-    	fprintf(LOGFILE1, "%s : %s\n", sys_call, data.path1);
-        fprintf(LOGFILE4, "INFO::%d%02d%02d-%02d:%02d:%02d:%s::/%s::/%s\n",timeinfo->tm_mday, 
         timeinfo->tm_mon+1, timeinfo->tm_year+1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, sys_call, data.path1, data.path2);
     }
 ...
